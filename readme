@@ -1,4 +1,8 @@
 Оператор AND имеет приоритет перед оператором OR
+AND, OR — логические операторы
+
+Когда можно выбрать 1 вариант - используем ENUM
+когда можно выбрать несколько вариантов - используем SET
 
 Новые записи в таблицу можно добавить не только с помощью VALUES, но и с помощью SET. 
 Следующие два запроса идентичны: 
@@ -21,6 +25,29 @@ NULL – это особое слово в MySQL и в отличии от "canc
 а специальное выражение IS NULL или IS NOT NULL.
 
 Select, update, insert, delete, truncate, Where, And и Or, Order by, limit offset - обязательно должны присутствовать в шпаргалках.
+
+выбрать данные из таблицы
+SELECT * FROM users;
+
+вставить новую запись
+INSERT INTO users (first_name, last_name) VALUES ('Иван', 'Петров');
+
+изменить существующие записи
+UPDATE users SET is_active = FALSE WHERE id = 1;
+
+WHERE — фильтрация по условию
+SELECT * FROM users WHERE is_active = TRUE;
+
+ORDER BY — сортировка
+SELECT * FROM users ORDER BY last_name ASC;
+(Сортирует по фамилии по возрастанию (A–Z).)
+
+LIMIT и OFFSET — ограничение количества строк + сдвиг
+SELECT * FROM users LIMIT 5;
+Выбирает первые 5 строк.
+
+SELECT * FROM users LIMIT 5 OFFSET 10;
+Пропускает 10 строк и берет следующие 5 
 
 Добавление одной записи
 INSERT INTO table (column1, column2)
@@ -48,11 +75,34 @@ WHERE condition;
 
 Удаление всех записей
 DELETE FROM table;
-
+TRUNCATE TABLE users;
 
 Удаление записей, соответствующих условию
-DELETE FROM table
-WHERE condition;
+DELETE FROM table WHERE condition;
+
+удаление таблицы в целом
+drop table if exists users5;
+
+DEFAUT
+пример использования при объявлении переменной
+amount mediumint(8) UNSIGNED not null default 0
+Пример в enum
+state enum ('new','cancelled','in_progress','delivered','completed') not null default 'new');
+
+пример вызова под VALUES в insert into table
+(1,56,5400,'2018-02-01 17:46:59', default),
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -151,6 +201,11 @@ SMALLINT        2	             -32768	               0	                      327
 MEDIUMINT       3	              -8388608	             0	                          8388607	             16777215
 INT             4	             -2147483648	          0	                      2147483647	          4294967295
 BIGINT          8	             -263	                 0	                      2^63-1	               2^64-1
+
+
+
+
+
 
 
 
